@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="D:\AndroidWork\Attendance\app\libs\BaiduLBS_Android.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="887fe1794faa3ec058a00d0669d039833a07acd6">
+        <dex dex="D:\AndroidWork\Attendance\app\build\intermediates\pre-dexed\debug\BaiduLBS_Android-258c07be7ed75c138dc6d195043e487a65a1b577.jar" />
+    </item>
+
+</items>
