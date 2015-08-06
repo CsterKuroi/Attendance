@@ -1,0 +1,112 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jogle.attendance.ShotActivity"
+    android:background="#ff000000">
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/camera_preview"
+        android:layout_centerInParent="true">
+
+    </FrameLayout>
+
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:id="@+id/actionbarbg"
+        android:adjustViewBounds="false"
+        android:src="@drawable/actionbarbg2"
+        android:background="@null" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:id="@+id/titlebox" >
+
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="26dp"
+            android:id="@+id/backButton"
+            android:src="@drawable/backwhite"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="#00ffffff"
+            android:scaleType="fitXY"
+            android:layout_gravity="center_vertical"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingRight="30dp"
+            android:paddingLeft="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="拍照"
+            android:id="@+id/textView2"
+            android:textColor="#ffffffff"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="center_vertical" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/camera_capture"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="visible"
+        android:src="@drawable/shot"
+        android:background="@null"
+        android:layout_marginBottom="20dp"
+        android:scaleType="fitXY" />
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="OK"
+        android:id="@+id/camera_ok"
+        android:visibility="invisible"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/camera_capture"
+        android:layout_toStartOf="@+id/camera_capture"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ok"
+        android:background="@null"
+        android:scaleType="fitXY" />
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="Cancel"
+        android:id="@+id/camera_cancel"
+        android:visibility="invisible"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/camera_capture"
+        android:layout_toEndOf="@+id/camera_capture"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/cancel"
+        android:background="@null"
+        android:scaleType="fitXY" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/camera_change"
+        android:background="@null"
+        android:src="@drawable/change"
+        android:layout_alignBottom="@+id/camera_cancel"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="20dp"
+        android:scaleType="fitXY" />
+
+</RelativeLayout>
