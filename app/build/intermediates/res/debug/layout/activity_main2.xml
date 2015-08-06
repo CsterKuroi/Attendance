@@ -72,7 +72,7 @@
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="尚未获取到时间，请连接网络"
+                android:text="正在连接到时间服务器…"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textSize="@dimen/content_font_size" />
         </LinearLayout>
@@ -118,11 +118,9 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/imageView12"
             android:layout_width="fill_parent"
-            android:layout_height="@dimen/line_height"
-            android:layout_marginLeft="@dimen/pic_size"
-            android:layout_marginRight="@dimen/cell_padding_right"
+            android:layout_height="5dp"
             android:background="@color/line" />
 
         <LinearLayout
@@ -159,11 +157,13 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:paddingTop="@dimen/cell_padding_top"
+                    android:paddingBottom="@dimen/cell_padding_bottom">
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/pic_size"
                         android:id="@+id/imageView6"
                         android:src="@drawable/sign_worktime"
                         android:layout_gravity="center_horizontal" />
@@ -178,7 +178,7 @@
                         android:layout_gravity="center_horizontal" />
 
                     <TextView
-                        android:id="@+id/textView5"
+                        android:id="@+id/textView15"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="上班时间"
@@ -199,14 +199,17 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:paddingTop="@dimen/cell_padding_top"
+                    android:paddingBottom="@dimen/cell_padding_bottom">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <com.example.jogle.attendance.RoundImageView
+                        android:layout_width="@dimen/pic_size"
+                        android:layout_height="@dimen/pic_size"
                         android:id="@+id/imageView7"
-                        android:src="@drawable/sign_signtime"
-                        android:layout_gravity="center_horizontal" />
+                        android:src="@drawable/shot"
+                        android:layout_gravity="center_horizontal"
+                        android:scaleType="fitXY" />
 
                     <TextView
                         android:id="@+id/textView12"
@@ -231,13 +234,13 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/imageView14"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/line_height"
                 android:background="@color/line" />
 
             <Button
-                android:layout_width="45dp"
+                android:layout_width="55dp"
                 android:layout_height="25dp"
                 android:text="签到"
                 android:id="@+id/button4"
@@ -250,7 +253,7 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/imageView24"
             android:layout_width="fill_parent"
             android:layout_height="5dp"
             android:background="@color/line" />
@@ -289,17 +292,19 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" >
+                    android:layout_weight="1"
+                    android:paddingTop="@dimen/cell_padding_top"
+                    android:paddingBottom="@dimen/cell_padding_bottom">
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/pic_size"
                         android:id="@+id/imageView8"
                         android:layout_gravity="center_horizontal"
                         android:src="@drawable/sign_xiabantime" />
 
                     <TextView
-                        android:id="@+id/textView13"
+                        android:id="@+id/textView23"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="20:30"
@@ -328,17 +333,20 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" >
+                    android:layout_weight="1"
+                    android:paddingTop="@dimen/cell_padding_top"
+                    android:paddingBottom="@dimen/cell_padding_bottom">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <com.example.jogle.attendance.RoundImageView
+                        android:layout_width="@dimen/pic_size"
+                        android:layout_height="@dimen/pic_size"
                         android:id="@+id/imageView9"
                         android:layout_gravity="center_horizontal"
-                        android:src="@drawable/sign_signtime" />
+                        android:src="@drawable/shot"
+                        android:scaleType="fitXY" />
 
                     <TextView
-                        android:id="@+id/textView15"
+                        android:id="@+id/textView35"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -359,13 +367,13 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/imageView25"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/line_height"
                 android:background="@color/line" />
 
             <Button
-                android:layout_width="45dp"
+                android:layout_width="55dp"
                 android:layout_height="25dp"
                 android:text="签退"
                 android:id="@+id/button5"
@@ -392,4 +400,4 @@
         android:textSize="@dimen/content_font_size" />
 
 </RelativeLayout>
-<!-- From: file:/D:/AndroidWork/Attendance/app/src/main/res/layout/activity_main2.xml -->
+<!-- From: file:/F:/Attendance/app/src/main/res/layout/activity_main2.xml -->

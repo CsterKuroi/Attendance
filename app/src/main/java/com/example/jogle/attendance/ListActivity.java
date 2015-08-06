@@ -78,9 +78,8 @@ public class ListActivity extends Activity {
             for (int i = listOfDataSet.size() - 1; i >= 0; i--) {
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("title", listOfDataSet.get(i).getTime());
-                map.put("info", listOfDataSet.get(i).getPosDescription());
+                map.put("info", listOfDataSet.get(i).getPosition());
                 map.put("img", listOfDataSet.get(i).getThumbnail());
-                map.put("recordFile", listOfDataSet.get(i).getPicName());
                 list.add(map);
             }
         }

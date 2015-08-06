@@ -240,7 +240,7 @@
                 android:background="@color/line" />
 
             <Button
-                android:layout_width="45dp"
+                android:layout_width="55dp"
                 android:layout_height="25dp"
                 android:text="签到"
                 android:id="@+id/button4"
@@ -373,7 +373,7 @@
                 android:background="@color/line" />
 
             <Button
-                android:layout_width="45dp"
+                android:layout_width="55dp"
                 android:layout_height="25dp"
                 android:text="签退"
                 android:id="@+id/button5"

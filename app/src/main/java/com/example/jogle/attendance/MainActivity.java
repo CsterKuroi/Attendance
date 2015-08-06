@@ -10,6 +10,9 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -32,12 +35,14 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 
 import java.io.File;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements Runnable{
     public static DataSet dataSet;
     private TextView time;
     private RoundImageView picshow;
@@ -58,22 +63,29 @@ public class MainActivity extends Activity {
             if (location.getLocType() == BDLocation.TypeGpsLocation ||
                     location.getLocType() == BDLocation.TypeNetWorkLocation ||
                     location.getLocType() == BDLocation.TypeOffLineLocation) {
-                // Get data
+
                 dataSet.setLatitude(location.getLatitude());
                 dataSet.setLongitude(location.getLongitude());
-
-                if (dataSet.getPosDescription() == null && location.getAddrStr() != null) {
-                    dataSet.setPosDescription(location.getAddrStr());
+                if (dataSet.getPosition() == null && location.getAddrStr() != null) {
+                    dataSet.setPosition(location.getAddrStr());
                     TextView addr = (TextView) findViewById(R.id.address);
-                    addr.setText(dataSet.getPosDescription());
+                    addr.setText(dataSet.getPosition());
                 }
             }
         }
     };
+    public Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            dataSet.setTime((String) msg.obj);
+            time.setText((String) msg.obj);
+        }
+    };
+
     private static final int CAPTURE_REQUEST_CODE = 100;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAPTURE_REQUEST_CODE) {
             switch (resultCode) {
                 case Activity.RESULT_OK:
@@ -83,17 +95,39 @@ public class MainActivity extends Activity {
                         @Override
                         public void onClick(View view) {
                             Intent intent = new Intent(MainActivity.this, ShowActivity.class);
+                            intent.putExtra("pic_path", dataSet.getPicPath());
                             startActivity(intent);
                         }
                     });
                     finishButton.setVisibility(View.VISIBLE);
                     break;
                 case Activity.RESULT_CANCELED:
-                    dataSet.setPicName(null);
+                    dataSet.setTimeStamp(null);
                     break;
             }
         }
-        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void run() {
+        while (true) {
+            try {
+                URL url = new URL("http://www.baidu.com");// 取得资源对象 
+                URLConnection uc = url.openConnection();// 生成连接对象    
+                uc.connect(); // 发出连接 
+                long ldate = uc.getDate(); // 取得网站日期时间（时间戳）
+                Date date = new Date(ldate);
+                Calendar c = Calendar.getInstance();
+                c.setTime(date);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+                String dateStr = sdf.format(c.getTime());
+                Message message = new Message();
+                message.obj = dateStr;
+                handler.sendMessage(message);
+                Thread.sleep(10000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -116,39 +150,7 @@ public class MainActivity extends Activity {
         time = (TextView) findViewById(R.id.time);
         if (dataSet.getTime() != null)
             time.setText(dataSet.getTime());
-        LocationManager locMan = (LocationManager) this.getSystemService(MainActivity.LOCATION_SERVICE);
-        locMan.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                long t = location.getTime();
-                Date date = new Date(t);
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(date);
-                String timeString = calendar.get(Calendar.YEAR) + "年" +
-                        calendar.get(Calendar.MONTH) + "月" +
-                        calendar.get(Calendar.DAY_OF_MONTH) + "日 " +
-                        calendar.get(Calendar.HOUR_OF_DAY) + ":" +
-                        (calendar.get(Calendar.MINUTE) >= 10 ? calendar.get(Calendar.MINUTE) : "0" + calendar.get(Calendar.MINUTE)) + ":" +
-                        (calendar.get(Calendar.SECOND) >= 10 ? calendar.get(Calendar.SECOND) : "0" + calendar.get(Calendar.SECOND));
-                time.setText(timeString);
-                dataSet.setTime(timeString);
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-
-            }
-        });
+        new Thread(this).start();
 
         // Set up Baidu Location Listener
         mLocationClient = new LocationClient(getApplicationContext());
@@ -163,7 +165,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 shotButton.startAnimation(animationSet);
-                if (dataSet.getPicName() != null) {
+                if (dataSet.getTimeStamp() != null) {
                     File pic = new File(dataSet.getPicPath());
                     if (pic.exists()) {
                         pic.delete();
@@ -191,8 +193,8 @@ public class MainActivity extends Activity {
                 // Create a media file name
                 String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
                 File mediaFile;
-                dataSet.setPicName("IMG_" + timeStamp + ".jpg");
-                mediaFile = new File(mediaStorageDir.getPath() + File.separator + dataSet.getPicName());
+                dataSet.setTimeStamp(timeStamp);
+                mediaFile = new File(dataSet.getPicPath());
                 return Uri.fromFile(mediaFile);
             }
         });
@@ -235,47 +237,36 @@ public class MainActivity extends Activity {
             }
         });
 
-        if (dataSet.getPicName() != null) {
+        if (dataSet.getTimeStamp() != null) {
             picshow.setImageBitmap(dataSet.getThumbnail());
             picshow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(MainActivity.this, ShowActivity.class);
+                    intent.putExtra("pic_path", dataSet.getPicPath());
                     startActivity(intent);
                 }
             });
             finishButton.setVisibility(View.VISIBLE);
         }
-        TextView alarm = (TextView) findViewById(R.id.setalarm);
-        alarm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
-                startActivity(intent);
-            }
-        });
 
         TextView addr = (TextView) findViewById(R.id.address);
-        addr.setText(dataSet.getPosDescription());
+        addr.setText(dataSet.getPosition());
 
         EditText editText = (EditText) findViewById(R.id.editText);
-        if (dataSet.getContext() != null)
-            editText.setText(dataSet.getContext());
+        if (dataSet.getContent() != null)
+            editText.setText(dataSet.getContent());
         editText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                dataSet.setContext(charSequence.toString());
+                dataSet.setContent(charSequence.toString());
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
+            public void afterTextChanged(Editable editable) {}
         });
     }
 
@@ -332,7 +323,7 @@ public class MainActivity extends Activity {
                 .setNegativeButton("是", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if (dataSet.getPicName() != null) {
+                        if (dataSet.getTimeStamp() != null) {
                             File pic = new File(dataSet.getPicPath());
                             if (pic.exists()) {
                                 pic.delete();

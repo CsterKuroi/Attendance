@@ -117,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="尚未获取到时间，请连接网络"
+                android:text="正在连接到时间服务器…"
                 android:id="@+id/time"
                 android:textSize="@dimen/content_font_size" />
         </LinearLayout>
@@ -155,7 +155,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="尚未获取到您的地址，请开启网络和GPS"
+                android:text="正在获取您的地址…请确保开启网络和GPS"
                 android:id="@+id/address"
                 android:textSize="@dimen/content_font_size"
                 android:layout_weight="1" />
@@ -163,7 +163,7 @@
             <ImageButton
                 android:layout_width="@dimen/little_pic_size"
                 android:layout_height="@dimen/little_pic_size"
-                android:id="@+id/imageButton3"
+                android:id="@+id/imageButton13"
                 android:scaleType="fitXY"
                 android:background="@null"
                 android:layout_alignParentBottom="true"
@@ -223,7 +223,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="内容    "
+                android:text="备注    "
                 android:id="@+id/textView9"
                 android:textSize="@dimen/content_font_size"
                 android:textColor="@color/content_font_blue" />
@@ -270,8 +270,7 @@
     <com.example.jogle.attendance.RoundImageView
         android:layout_width="@dimen/pic_size"
         android:layout_height="@dimen/pic_size"
-        android:id="@+id/shot"
-        android:src="@drawable/shot"
+        android:id="@+id/picshow"
         android:scaleType="fitXY"
         android:background="@null"
         android:layout_alignParentBottom="false"
@@ -280,6 +279,20 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="65dp"
         android:layout_marginTop="200dp" />
+
+    <ImageButton
+        android:layout_width="@dimen/little_pic_size"
+        android:layout_height="@dimen/little_pic_size"
+        android:id="@+id/shot"
+        android:background="@null"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="@dimen/cell_padding_right"
+        android:layout_marginTop="213dp"
+        android:src="@drawable/shot"
+        android:scaleType="fitXY" />
 
     <ImageButton
         android:layout_width="@dimen/pic_size"
@@ -308,20 +321,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="61dp"
         android:layout_marginBottom="@dimen/cell_padding_bottom"
-        android:visibility="visible" />
-
-    <TextView
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="设置提醒"
-        android:id="@+id/setalarm"
-        android:textSize="@dimen/content_font_size"
-        android:textColor="@color/content_font_blue"
-        android:gravity="center_vertical|center_horizontal"
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true" />
+        android:visibility="gone" />
 
 </RelativeLayout>
-<!-- From: file:/D:/AndroidWork/Attendance/app/src/main/res/layout/activity_main.xml -->
+<!-- From: file:/F:/Attendance/app/src/main/res/layout/activity_main.xml -->

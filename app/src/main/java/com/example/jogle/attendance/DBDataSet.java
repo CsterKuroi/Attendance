@@ -9,7 +9,8 @@ public class DBDataSet extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "record.db";
     private static final int DATABASE_VERSION = 1;
     private static String sql = "create table record (" + "_id integer primary key autoincrement, "
-                                + "position text, " + "time text, " + "thumbnail text, " + "context text, " + "pic_name text)";
+            + "type integer, " + "user_id integer, " + "user_name text, " + "time text, "
+            + "position text, " + "content text, " + "time_stamp text)";
 
 	public DBDataSet(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);

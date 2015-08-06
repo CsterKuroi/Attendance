@@ -65,7 +65,7 @@
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="8PpaLZjGQD69YkRdROeCMRdQ" />
+            android:value="MhkGhI120wkZkZN51h6T3484" />
        //key:开发者申请的key
         <activity
             android:name=".ShowActivity"
@@ -74,10 +74,6 @@
         <activity
             android:name=".ListActivity"
             android:label="@string/title_activity_list" >
-        </activity>
-        <activity
-            android:name=".AlarmActivity"
-            android:label="@string/title_activity_alarm" >
         </activity>
         <activity
             android:name=".Main2Activity"
@@ -95,6 +91,10 @@
         <activity
             android:name=".ApartmentActivity"
             android:label="@string/title_activity_apartment" >
+        </activity>
+        <activity
+            android:name=".AlarmActivity"
+            android:label="@string/title_activity_alarm" >
         </activity>
     </application>
 

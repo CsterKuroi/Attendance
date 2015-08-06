@@ -32,9 +32,10 @@ public class ShowActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
 
-        if (MainActivity.dataSet.getPicName() != null) {
+        String picPath = getIntent().getStringExtra("pic_path");
+        if (picPath != null) {
             ImageView pic = (ImageView) findViewById(R.id.show_pic);
-            Bitmap bmp = MainActivity.dataSet.getPicBitMap();
+            Bitmap bmp = DataSet.getPicBitMap(picPath);
             pic.setImageBitmap(bmp);
         }
 
@@ -42,8 +43,6 @@ public class ShowActivity extends Activity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ShowActivity.this, MainActivity.class);
-                startActivity(intent);
                 finish();
             }
         });
@@ -52,8 +51,6 @@ public class ShowActivity extends Activity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            Intent intent = new Intent(ShowActivity.this, MainActivity.class);
-            startActivity(intent);
             finish();
             return false;
         }

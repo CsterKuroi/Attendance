@@ -94,7 +94,7 @@ public class LocateActivity extends Activity {
         mBaiduMap.setMyLocationEnabled(true);
 
         pos = (TextView)findViewById(R.id.pos);
-        pos.setText(MainActivity.dataSet.getPosDescription());
+        pos.setText(MainActivity.dataSet.getPosition());
 
         mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
         mLocationClient.registerLocationListener(myListener);    //注册监听函数
@@ -118,9 +118,9 @@ public class LocateActivity extends Activity {
             @Override
             public void onGetReverseGeoCodeResult(ReverseGeoCodeResult reverseGeoCodeResult) {
                 poiData.clear();
-                poiData.add(MainActivity.dataSet.getPosDescription());
+                poiData.add(MainActivity.dataSet.getPosition());
                 for (int i = 0; i < reverseGeoCodeResult.getPoiList().size(); i++) {
-                    if (!MainActivity.dataSet.getPosDescription().equals(
+                    if (!MainActivity.dataSet.getPosition().equals(
                             reverseGeoCodeResult.getPoiList().get(i).name.trim()))
                         poiData.add(reverseGeoCodeResult.getPoiList().get(i).name.trim());
                 }
@@ -134,7 +134,7 @@ public class LocateActivity extends Activity {
         poiList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                MainActivity.dataSet.setPosDescription(poiData.get(i));
+                MainActivity.dataSet.setPosition(poiData.get(i));
                 pos.setText(poiData.get(i));
                 Intent intent = new Intent(LocateActivity.this, MainActivity.class);
                 startActivity(intent);
@@ -196,10 +196,7 @@ public class LocateActivity extends Activity {
                 .setNegativeButton("是", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                                Environment.DIRECTORY_PICTURES), "Attendance");
-                        String path = mediaStorageDir.getAbsolutePath() + File.separator + MainActivity.dataSet.getPicName();
-                        File pic = new File(path);
+                        File pic = new File(MainActivity.dataSet.getPicPath());
                         pic.delete();
                         Intent intent = new Intent(LocateActivity.this, MainActivity.class);
                         startActivity(intent);

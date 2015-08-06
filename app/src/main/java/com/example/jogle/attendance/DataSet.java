@@ -29,23 +29,51 @@ import java.util.Date;
  */
 public class DataSet implements Serializable{
     private int type;
-    private String picName;
-    private String posDescription;
-    private String context;
+    /* 0 -> 外勤; 1 -> 考勤签到; 2 -> 考勤签退 */
+    private int userID;
+    private String userName;
+    private String time;
+    /*Format: YYYY年MM月DD日 hh:mm:ss*/
+    private String position;
+    private String content;
+    private String timeStamp;
+    /*Picture Name: IMG_userID_timeStamp.jpg*/
+    /*Thumbnail Name: Thumbnail_userID_timeStamp.jpg*/
     private double latitude;
     private double longitude;
-    private String time;
-    private Bitmap thumbnail;
 
     public DataSet() {
         type = 0;
-        picName = null;
-        posDescription = null;
-        context = null;
-        latitude = -1;
-        longitude = -1;
+        userID = -1;
+        userName ="";
         time = null;
-        thumbnail = null;
+        position = null;
+        content = "";
+        timeStamp = null;
+    }
+
+    public static Bitmap getPicBitMap(String picPath) {
+        BitmapFactory.Options opt = new BitmapFactory.Options();
+        opt.inPreferredConfig = Bitmap.Config.RGB_565;
+        opt.inPurgeable = true;
+        opt.inInputShareable = true;
+        FileInputStream is = null;
+        try {
+            is = new FileInputStream(picPath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Bitmap bmp = BitmapFactory.decodeStream(is, null, opt);
+        double rate1 = bmp.getWidth() / 2000.0;
+        double rate2 = bmp.getHeight() / 2000.0;
+        if (bmp.getWidth() >= 2000 || bmp.getHeight() >= 2000) {
+            double rate = (rate1 > rate2) ? rate1: rate2;
+            // extract picture size that can fill the screen to avoid OutOfMemoryException
+            Bitmap thumbnailBitmap = ThumbnailUtils.extractThumbnail(bmp,
+                    (int) (bmp.getWidth() / rate), (int) (bmp.getHeight() / rate), 0);
+            return thumbnailBitmap;
+        }
+        return bmp;
     }
 
     public Bitmap getPicBitMap() {
@@ -64,6 +92,7 @@ public class DataSet implements Serializable{
         double rate2 = bmp.getHeight() / 2000.0;
         if (bmp.getWidth() >= 2000 || bmp.getHeight() >= 2000) {
             double rate = (rate1 > rate2) ? rate1: rate2;
+            // extract picture size that can fill the screen to avoid OutOfMemoryException
             Bitmap thumbnailBitmap = ThumbnailUtils.extractThumbnail(bmp,
                     (int) (bmp.getWidth() / rate), (int) (bmp.getHeight() / rate), 0);
             return thumbnailBitmap;
@@ -74,99 +103,116 @@ public class DataSet implements Serializable{
     public String getPicPath() {
         File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES), "Attendance");
-        String path = mediaStorageDir.getAbsolutePath() + File.separator + picName;
+        String path = mediaStorageDir.getAbsolutePath() + File.separator +
+                "IMG_" + userID + "_" + timeStamp + ".jpg";
         return path;
     }
 
-    public String getThumbnailString() {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        if (thumbnail != null) {
-            thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            try {
-                return new String(baos.toByteArray(), "ISO-8859-1");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    public String getThumbnailPath() {
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), "Attendance");
+        String path = mediaStorageDir.getAbsolutePath() + File.separator +
+                "thumbnail_" + userID + "_" + timeStamp + ".jpg";
+        return path;
+    }
+
+    public Bitmap getThumbnail() {
+        FileInputStream is = null;
+        try {
+            is = new FileInputStream(getThumbnailPath());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
-        return "";
+        Bitmap bmp = BitmapFactory.decodeStream(is);
+        return bmp;
     }
 
     public void generateThumbnail() {
         Bitmap bmp = getPicBitMap();
-        thumbnail = ThumbnailUtils.extractThumbnail(bmp, 100, 100, 0);
+        Bitmap thumbnail = ThumbnailUtils.extractThumbnail(bmp, 100, 100, 0);
         bmp.recycle();
+        File thumbnailFile = new File(getThumbnailPath());
+        if (thumbnailFile.exists())
+            thumbnailFile.delete();
+        try {
+            FileOutputStream out = new FileOutputStream(thumbnailFile);
+            thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, out);
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public String getPicName() {
-        return picName;
-    }
-
-    public String getPosDescription() {
-        return posDescription;
-    }
-
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public Bitmap getThumbnail() {
-        return thumbnail;
-    }
-
-    public String getContext() {
-        return context;
+    public int getType() {
+        return type;
     }
 
     public void setType(int type) {
         this.type = type;
     }
 
-    public void setPicName(String picName) {
-        this.picName = picName;
+    public int getUserID() {
+        return userID;
     }
 
-    public void setPosDescription(String posDescription) {
-        this.posDescription = posDescription;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getTime() {
+        return time;
     }
 
     public void setTime(String time) {
         this.time = time;
     }
 
-    public void setThumbnail(Bitmap thumbnail) {
-        this.thumbnail = thumbnail;
+    public String getTimeStamp() {
+        return timeStamp;
     }
 
-    public void setThumbnail(String thumbnailString) {
-        byte[] thumbnailByte = null;
-        try {
-            thumbnailByte = thumbnailString.getBytes("ISO-8859-1");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        if(thumbnailByte.length != 0){
-            thumbnail = BitmapFactory.decodeByteArray(thumbnailByte, 0, thumbnailByte.length);
-        }
-        else thumbnail = null;
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
-    public void setContext(String context) {
-        this.context = context;
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }

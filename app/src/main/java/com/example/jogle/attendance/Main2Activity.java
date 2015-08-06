@@ -1,8 +1,6 @@
 package com.example.jogle.attendance;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
@@ -10,6 +8,8 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.Window;
@@ -19,7 +19,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
@@ -29,12 +28,14 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 
 import java.io.File;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 
-public class Main2Activity extends Activity {
+public class Main2Activity extends Activity implements Runnable{
     public static DataSet dataSet1;
     public static DataSet dataSet2;
     private TextView time;
@@ -54,20 +55,27 @@ public class Main2Activity extends Activity {
             if (location.getLocType() == BDLocation.TypeGpsLocation ||
                     location.getLocType() == BDLocation.TypeNetWorkLocation ||
                     location.getLocType() == BDLocation.TypeOffLineLocation) {
+
                 dataSet1.setLatitude(location.getLatitude());
                 dataSet1.setLongitude(location.getLongitude());
                 dataSet2.setLatitude(location.getLatitude());
                 dataSet2.setLongitude(location.getLongitude());
-
-                if (dataSet1.getPosDescription() == null) {
-                    dataSet1.setPosDescription(location.getAddrStr());
+                if (dataSet1.getPosition() == null) {
+                    dataSet1.setPosition(location.getAddrStr());
                     TextView addr = (TextView) findViewById(R.id.address);
-                    addr.setText(dataSet1.getPosDescription());
+                    addr.setText(dataSet1.getPosition());
                 }
-                if (dataSet2.getPosDescription() == null) {
-                    dataSet2.setPosDescription(location.getAddrStr());
+                if (dataSet2.getPosition() == null) {
+                    dataSet2.setPosition(location.getAddrStr());
                 }
             }
+        }
+    };
+    public Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            dataSet1.setTime((String) msg.obj);
+            dataSet2.setTime((String) msg.obj);
+            time.setText((String) msg.obj);
         }
     };
     private static final int CAPTURE_REQUEST_CODE1 = 101;
@@ -83,9 +91,17 @@ public class Main2Activity extends Activity {
                     view7.setClickable(false);
                     b4.setClickable(true);
                     b4.setBackgroundColor(0xff01aff4);
+                    view7.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(Main2Activity.this, ShowActivity.class);
+                            intent.putExtra("pic_path", dataSet1.getPicPath());
+                            startActivity(intent);
+                        }
+                    });
                     break;
                 case Activity.RESULT_CANCELED:
-                    dataSet1.setPicName(null);
+                    dataSet1.setTimeStamp(null);
                     break;
             }
         }
@@ -97,13 +113,43 @@ public class Main2Activity extends Activity {
                     view9.setClickable(false);
                     b5.setClickable(true);
                     b5.setBackgroundColor(0xff01aff4);
+                    view9.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(Main2Activity.this, ShowActivity.class);
+                            intent.putExtra("pic_path", dataSet2.getPicPath());
+                            startActivity(intent);
+                        }
+                    });
                     break;
                 case Activity.RESULT_CANCELED:
-                    dataSet2.setPicName(null);
+                    dataSet2.setTimeStamp(null);
                     break;
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void run() {
+        while (true) {
+            try {
+                URL url = new URL("http://www.baidu.com");// 取得资源对象 
+                URLConnection uc = url.openConnection();// 生成连接对象    
+                uc.connect(); // 发出连接 
+                long ldate = uc.getDate(); // 取得网站日期时间（时间戳）
+                Date date = new Date(ldate);
+                Calendar c = Calendar.getInstance();
+                c.setTime(date);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+                String dateStr = sdf.format(c.getTime());
+                Message message = new Message();
+                message.obj = dateStr;
+                handler.sendMessage(message);
+                Thread.sleep(10000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -129,41 +175,7 @@ public class Main2Activity extends Activity {
         time = (TextView) findViewById(R.id.time);
         if (dataSet1.getTime() != null)
             time.setText(dataSet1.getTime());
-
-        LocationManager locMan = (LocationManager) this.getSystemService(MainActivity.LOCATION_SERVICE);
-        locMan.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                long t = location.getTime();
-                Date date = new Date(t);
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(date);
-                String timeString = calendar.get(Calendar.YEAR) + "年" +
-                        calendar.get(Calendar.MONTH) + "月" +
-                        calendar.get(Calendar.DAY_OF_MONTH) + "日 " +
-                        calendar.get(Calendar.HOUR_OF_DAY) + ":" +
-                        (calendar.get(Calendar.MINUTE) >= 10 ? calendar.get(Calendar.MINUTE) : "0" + calendar.get(Calendar.MINUTE)) + ":" +
-                        (calendar.get(Calendar.SECOND) >= 10 ? calendar.get(Calendar.SECOND) : "0" + calendar.get(Calendar.SECOND));
-                time.setText(timeString);
-                dataSet1.setTime(timeString);
-                dataSet2.setTime(timeString);
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-
-            }
-        });
+        new Thread(this).start();
 
         t12 = (TextView) findViewById(R.id.textView12);
         t35 = (TextView) findViewById(R.id.textView35);
@@ -186,34 +198,10 @@ public class Main2Activity extends Activity {
             }
         });
         TextView addr = (TextView) findViewById(R.id.address);
-        addr.setText(dataSet1.getPosDescription());
-        addr.setText(dataSet2.getPosDescription());
-        b4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //b4.startAnimation(animationSet);
-                DBOperation operation = new DBOperation(getApplicationContext());
-                operation.save(dataSet1);
-                t12.setText(dataSet1.getTime().substring(dataSet1.getTime().length() - 8));
-                b4.setBackgroundColor(0xffdddddd);
-                b4.setClickable(false);
-                b4.setText("已签到");
-            }
-        });
-        b5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //b5.startAnimation(animationSet);
-                DBOperation operation = new DBOperation(getApplicationContext());
-                operation.save(dataSet2);
-                t35.setText(dataSet2.getTime().substring(dataSet2.getTime().length() - 8));
-                b5.setBackgroundColor(0xffdddddd);
-                b5.setClickable(false);
-                b5.setText("已签退");
-            }
-        });
+        addr.setText(dataSet1.getPosition());
+        addr.setText(dataSet2.getPosition());
 
-        if (dataSet1.getPicName() == null) {
+        if (dataSet1.getTimeStamp() == null) {
             b4.setClickable(false);
             b4.setBackgroundColor(0xffdddddd);
             view7.setOnClickListener(new View.OnClickListener() {
@@ -243,14 +231,14 @@ public class Main2Activity extends Activity {
                     // Create a media file name
                     String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
                     File mediaFile;
-                    dataSet1.setPicName("IMG_" + timeStamp + ".jpg");
-                    mediaFile = new File(mediaStorageDir.getPath() + File.separator + dataSet1.getPicName());
+                    dataSet1.setTimeStamp(timeStamp);
+                    mediaFile = new File(dataSet1.getPicPath());
                     return Uri.fromFile(mediaFile);
                 }
             });
         }
 
-        if (dataSet2.getPicName() == null) {
+        if (dataSet2.getTimeStamp() == null) {
             b5.setClickable(false);
             b5.setBackgroundColor(0xffdddddd);
             view9.setOnClickListener(new View.OnClickListener() {
@@ -280,13 +268,39 @@ public class Main2Activity extends Activity {
                     // Create a media file name
                     String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
                     File mediaFile;
-                    dataSet2.setPicName("IMG_" + timeStamp + ".jpg");
-                    mediaFile = new File(mediaStorageDir.getPath() + File.separator + dataSet2.getPicName());
+                    dataSet2.setTimeStamp(timeStamp);
+                    mediaFile = new File(dataSet2.getPicPath());
                     return Uri.fromFile(mediaFile);
                 }
             });
 
         }
+
+        b4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //b4.startAnimation(animationSet);
+                DBOperation operation = new DBOperation(getApplicationContext());
+                operation.save(dataSet1);
+                t12.setText(dataSet1.getTime().substring(dataSet1.getTime().length() - 8));
+                b4.setBackgroundColor(0xffdddddd);
+                b4.setClickable(false);
+                b4.setText("已签到");
+            }
+        });
+        b5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //b5.startAnimation(animationSet);
+                DBOperation operation = new DBOperation(getApplicationContext());
+                operation.save(dataSet2);
+                t35.setText(dataSet2.getTime().substring(dataSet2.getTime().length() - 8));
+                b5.setBackgroundColor(0xffdddddd);
+                b5.setClickable(false);
+                b5.setText("已签退");
+            }
+        });
+
     }
 
     protected Animation scaleAnimation()

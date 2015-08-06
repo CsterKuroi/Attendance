@@ -71,7 +71,7 @@
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="8PpaLZjGQD69YkRdROeCMRdQ" />
+            android:value="MhkGhI120wkZkZN51h6T3484" />
        //key:开发者申请的key
         <activity
             android:name="com.example.jogle.attendance.ShowActivity"
@@ -80,10 +80,6 @@
         <activity
             android:name="com.example.jogle.attendance.ListActivity"
             android:label="@string/title_activity_list" >
-        </activity>
-        <activity
-            android:name="com.example.jogle.attendance.AlarmActivity"
-            android:label="@string/title_activity_alarm" >
         </activity>
         <activity
             android:name="com.example.jogle.attendance.Main2Activity"
@@ -97,6 +93,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.jogle.attendance.ApartmentActivity"
+            android:label="@string/title_activity_apartment" >
+        </activity>
+        <activity
+            android:name="com.example.jogle.attendance.AlarmActivity"
+            android:label="@string/title_activity_alarm" >
         </activity>
     </application>
 
