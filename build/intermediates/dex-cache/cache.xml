@@ -2,6 +2,27 @@
 <items version="2" >
 
     <item
+        jar="C:\Users\Kuroi\Documents\GitHub\Attendance\app\libs\json-lib-2.2.3-jdk15.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="e9c10548f3d5b260d604818057060cd0ab3b733c">
+        <dex dex="C:\Users\Kuroi\Documents\GitHub\Attendance\app\build\intermediates\pre-dexed\debug\json-lib-2.2.3-jdk15-ec7d9a97d2243dc9dacb1814534c975d52e953d6.jar" />
+    </item>
+    <item
+        jar="C:\Users\Kuroi\Documents\GitHub\Attendance\app\libs\BaiduLBS_Android.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="887fe1794faa3ec058a00d0669d039833a07acd6">
+        <dex dex="C:\Users\Kuroi\Documents\GitHub\Attendance\app\build\intermediates\pre-dexed\debug\BaiduLBS_Android-05847739811645500f3da49cdc9f1e6d00aa7636.jar" />
+    </item>
+    <item
+        jar="C:\Users\Kuroi\Documents\GitHub\Attendance\app\libs\autobahn-0.5.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="5f62bc6117f905fd37955f6e2ebd3aad68701b60">
+        <dex dex="C:\Users\Kuroi\Documents\GitHub\Attendance\app\build\intermediates\pre-dexed\debug\autobahn-0.5.0-d575777b7127077b79401ae41db6f90445a6c9aa.jar" />
+    </item>
+    <item
         jar="D:\AndroidWork\Attendance\app\libs\BaiduLBS_Android.jar"
         jumboMode="false"
         revision="20.0.0"

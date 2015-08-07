@@ -167,7 +167,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="部门签到"
+        android:text="下属签到"
         android:id="@+id/apartment"
         android:layout_alignParentBottom="false"
         android:layout_alignParentRight="true"
@@ -175,4 +175,4 @@
         android:layout_alignParentTop="true" />
 
 </RelativeLayout>
-<!-- From: file:/F:/Attendance/app/src/main/res/layout/activity_list.xml -->
+<!-- From: file:/C:/Users/Kuroi/Documents/GitHub/Attendance/app/src/main/res/layout/activity_list.xml -->

@@ -71,7 +71,7 @@
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="MhkGhI120wkZkZN51h6T3484" />
+            android:value="8PpaLZjGQD69YkRdROeCMRdQ" />
        //key:开发者申请的key
         <activity
             android:name="com.example.jogle.attendance.ShowActivity"
