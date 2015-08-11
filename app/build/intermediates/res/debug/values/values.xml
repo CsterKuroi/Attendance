@@ -5,6 +5,9 @@
     <color name="content_background">#ffffffff</color>
     <color name="content_font">#ff000000</color>
     <color name="content_font_blue">#ff01aff4</color>
+    <color name="date_1">#F24949</color>
+    <color name="date_2">#40000000</color>
+    <color name="focus_circle_bg">#F24949</color>
     <color name="line">#ffdddddd</color>
     <color name="tab1">#ff01aff4</color>
     <color name="tab2">#ff929292</color>
@@ -38,15 +41,34 @@
     <string name="hello_world">Hello Jogle!</string>
     <string name="title_activity_alarm">AlarmActivity</string>
     <string name="title_activity_apartment">ApartmentActivity</string>
+    <string name="title_activity_calendar">CalendarActivity</string>
+    <string name="title_activity_customer_picker">请选择联系人</string>
     <string name="title_activity_entry">考勤打卡</string>
     <string name="title_activity_list">ListActivity</string>
     <string name="title_activity_locate">LocateActivity</string>
     <string name="title_activity_my_camera">MyCameraActivity</string>
     <string name="title_activity_shot_and_locate">ShotAndLocateActivity</string>
     <string name="title_activity_show">ShowActivity</string>
+    <string name="title_activity_statistic">StatisticActivity</string>
+    <!-- From: file:/C:/Users/Kuroi/Documents/GitHub/Attendance/app/build/intermediates/exploded-aar/Attendance/KLModule/unspecified/res/values/values.xml -->
+    <eat-comment/>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
     <!-- From: file:/C:/Users/Kuroi/Documents/GitHub/Attendance/app/src/main/res/values/styles.xml -->
     <eat-comment/>
-    <style name="AppTheme" parent="android:Theme.Holo.Light.NoActionBar">
+    <style name="AppTheme" parent="android:Theme.Holo.Light">
         <!-- Customize your theme here. -->
+    </style>
+    <style name="dateStyle">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">12sp</item>
     </style>
 </resources>
