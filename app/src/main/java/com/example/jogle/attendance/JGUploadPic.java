@@ -27,7 +27,7 @@ public class JGUploadPic extends Thread {
     {
         String uploadFile = dataSet.getPicPath();    //���ϴ����ļ�·��
     /*	String postUrl = "http://172.29.247.1/index.php"; //����POST�����ҳ��*/
-        String postUrl = "http://192.168.50.11:8000/kaoqintupianbaocun/"; //����POST�����ҳ��
+        String postUrl = "http://101.200.189.127:8001/kaoqintupianbaocun/"; //����POST�����ҳ��
 
         String end = "\r\n";
         String twoHyphens = "--";

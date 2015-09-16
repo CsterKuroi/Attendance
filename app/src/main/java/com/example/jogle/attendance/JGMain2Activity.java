@@ -20,6 +20,7 @@ import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
@@ -53,7 +54,7 @@ public class JGMain2Activity extends Activity implements Runnable, JGUploadCallB
     private RoundImageView view9;
     private TextView t12;
     private TextView t35;
-    private ImageButton backButton3;
+    private ImageView backButton3;
     private BDLocationListener myListener = new BDLocationListener() {
         @Override
         public void onReceiveLocation(BDLocation location) {
@@ -210,10 +211,10 @@ public class JGMain2Activity extends Activity implements Runnable, JGUploadCallB
         b5 = (Button) findViewById(R.id.button5);
         view7 = (RoundImageView) findViewById(R.id.imageView7);
         view9 = (RoundImageView) findViewById(R.id.imageView9);
-        backButton3 = (ImageButton) findViewById(R.id.backButton3);
+        backButton3 = (ImageView) findViewById(R.id.backButton3);
 
         // refresh dataSet
-        int uid = getIntent().getIntExtra("uid", -1);
+        int uid = getIntent().getIntExtra("uid", 101);
         String name = getIntent().getStringExtra("name");
 //        if (dataSet1 == null || dataSet1.getTimeStamp() == null) {
             dataSet1 = new JGDataSet();

@@ -2,39 +2,39 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Kuroi\Documents\GitHub\Attendance\app\libs\BaiduLBS_Android.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="887fe1794faa3ec058a00d0669d039833a07acd6">
-        <dex dex="C:\Users\Kuroi\Documents\GitHub\Attendance\app\build\intermediates\pre-dexed\debug\BaiduLBS_Android-05847739811645500f3da49cdc9f1e6d00aa7636.jar" />
-    </item>
-    <item
-        jar="D:\Android SDK\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
+        jar="C:\ASDK\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
-        <dex dex="C:\Users\Kuroi\Documents\GitHub\Attendance\app\build\intermediates\pre-dexed\debug\support-v4-19.1.0-fd59a36dec17464e4ed56c9729f6b24191808a5c.jar" />
+        <dex dex="F:\Attendance-master\app\build\intermediates\pre-dexed\debug\support-v4-19.1.0-1b2a68324e1936a92a95d88a1467e7b97e6c0f24.jar" />
     </item>
     <item
-        jar="C:\Users\Kuroi\Documents\GitHub\Attendance\app\build\intermediates\exploded-aar\Attendance\KLModule\unspecified\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="1ff7e102c6f8f55cc9ecf40f849130a305832d1c">
-        <dex dex="C:\Users\Kuroi\Documents\GitHub\Attendance\app\build\intermediates\pre-dexed\debug\classes-a6f6cb18d6b7463b58e2feea3a873a94cf851ee4.jar" />
-    </item>
-    <item
-        jar="C:\Users\Kuroi\Documents\GitHub\Attendance\app\libs\autobahn-0.5.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="5f62bc6117f905fd37955f6e2ebd3aad68701b60">
-        <dex dex="C:\Users\Kuroi\Documents\GitHub\Attendance\app\build\intermediates\pre-dexed\debug\autobahn-0.5.0-d575777b7127077b79401ae41db6f90445a6c9aa.jar" />
-    </item>
-    <item
-        jar="C:\Users\Kuroi\Documents\GitHub\Attendance\app\libs\json-lib-2.2.3-jdk15.jar"
+        jar="F:\Attendance-master\app\libs\json-lib-2.2.3-jdk15.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="e9c10548f3d5b260d604818057060cd0ab3b733c">
-        <dex dex="C:\Users\Kuroi\Documents\GitHub\Attendance\app\build\intermediates\pre-dexed\debug\json-lib-2.2.3-jdk15-ec7d9a97d2243dc9dacb1814534c975d52e953d6.jar" />
+        <dex dex="F:\Attendance-master\app\build\intermediates\pre-dexed\debug\json-lib-2.2.3-jdk15-f32d9ffbc15d2a07befee6fbc4c26da1bd0d5a91.jar" />
+    </item>
+    <item
+        jar="F:\Attendance-master\app\build\intermediates\exploded-aar\Attendance-master\KLModule\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="03dc2b090a5cd0dd40e0d6e144f542145378ec44">
+        <dex dex="F:\Attendance-master\app\build\intermediates\pre-dexed\debug\classes-d170902bfbdb74f37a44db329e620eba930c8a24.jar" />
+    </item>
+    <item
+        jar="F:\Attendance-master\app\libs\autobahn-0.5.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5f62bc6117f905fd37955f6e2ebd3aad68701b60">
+        <dex dex="F:\Attendance-master\app\build\intermediates\pre-dexed\debug\autobahn-0.5.0-1324e057acf9641165d63bc9a6f72226baef21a6.jar" />
+    </item>
+    <item
+        jar="F:\Attendance-master\app\libs\BaiduLBS_Android.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="887fe1794faa3ec058a00d0669d039833a07acd6">
+        <dex dex="F:\Attendance-master\app\build\intermediates\pre-dexed\debug\BaiduLBS_Android-509cb845b4bb57e9e5d7c60b1c802690e474ae7c.jar" />
     </item>
 
 </items>

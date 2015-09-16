@@ -18,7 +18,7 @@ interface JGUploadCallBack {
 }
 
 public class JGUpload {
-    private final String wsuri = "ws://192.168.50.11:8000/ws";
+    private final String wsuri = "ws://101.200.189.127:8001/ws";
     //private final String wsuri = "ws://192.168.50.101:8001/ws";
     private String tempjson="";
     private WebSocketConnection mConnection;

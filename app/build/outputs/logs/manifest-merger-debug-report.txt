@@ -55,7 +55,7 @@ ADDED from AndroidManifest.xml:25:5
 		ADDED from AndroidManifest.xml:25:22
 uses-permission#android.permission.INTERNET
 ADDED from AndroidManifest.xml:29:5
-MERGED from Attendance:KLModule:unspecified:11:5
+MERGED from Attendance-master:KLModule:unspecified:11:5
 	android:name
 		ADDED from AndroidManifest.xml:29:22
 uses-permission#android.permission.MOUNT_UNMOUNT_FILESYSTEMS
@@ -192,9 +192,9 @@ ADDED from AndroidManifest.xml:111:9
 		ADDED from AndroidManifest.xml:112:13
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
-MERGED from Attendance:KLModule:unspecified:7:5
+MERGED from Attendance-master:KLModule:unspecified:7:5
 	android:targetSdkVersion
-		ADDED from Attendance:KLModule:unspecified:9:9
+		ADDED from Attendance-master:KLModule:unspecified:9:9
 	android:minSdkVersion
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0

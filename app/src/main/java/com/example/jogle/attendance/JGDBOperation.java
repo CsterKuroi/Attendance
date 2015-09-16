@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class JGDBOperation {
 	
@@ -35,6 +36,51 @@ public class JGDBOperation {
 		else{
 			return false;
 		}
+	}
+
+	public boolean saveremind(String s,String i1,String i2,String wt,String ot){
+		SQLiteDatabase db = database.getWritableDatabase();
+		ContentValues value = new ContentValues();
+		value.put("_id", "1");
+		value.put("switch",s);
+		value.put("remind_id1", i1);
+		value.put("remind_id2", i2);
+		value.put("work_time", wt);
+		value.put("off_time", ot);
+		db.insertOrThrow("remind", null, value);
+		db.close();
+		return true;
+	}
+
+	public void deleteremind(){
+		SQLiteDatabase db = database.getWritableDatabase();
+		String sql = "delete from remind";
+		db.execSQL(sql);
+		db.close();
+	}
+
+	public List<String> getremind(){
+		List<String> list = null;
+		SQLiteDatabase db = database.getReadableDatabase();
+		String sql = "select * from remind";
+		Cursor cursor = db.rawQuery(sql, null);
+		list = new ArrayList<String>();
+		while(cursor.moveToNext()){
+			String s=cursor.getString(1);
+			String i1=cursor.getString(2);
+			String i2=cursor.getString(3);
+			String wt=cursor.getString(4);
+			String ot=cursor.getString(5);
+			list.add(s);
+			list.add(i1);
+			list.add(i2);
+			list.add(wt);
+			list.add(ot);
+		}
+		cursor.close();
+		db.close();
+		Log.e("list", list.toString());
+		return list;
 	}
 
 	public List<JGDataSet> getByUID(String queryName){

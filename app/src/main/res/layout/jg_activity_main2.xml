@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/content_background"
+    android:background="#edf3f5"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -12,7 +12,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:background="@color/title_background"
+        android:background="#106bb9"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:paddingBottom="@dimen/cell_padding_bottom"
@@ -27,7 +27,8 @@
             android:layout_height="wrap_content"
             android:text="考勤签到"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="@dimen/title_font_size" />
+            android:textSize="18sp"
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
 
@@ -57,7 +58,8 @@
             android:paddingBottom="@dimen/cell_padding_bottom"
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
-            android:paddingTop="@dimen/cell_padding_top">
+            android:paddingTop="@dimen/cell_padding_top"
+            android:background="#FFFFFF">
 
             <TextView
                 android:id="@+id/textView2"
@@ -83,7 +85,7 @@
             android:layout_height="@dimen/line_height"
             android:layout_marginLeft="@dimen/pic_size"
             android:layout_marginRight="@dimen/cell_padding_right"
-            android:background="@color/line" />
+            android:background="#edf3f5" />
 
         <LinearLayout
             android:id="@+id/showmap"
@@ -94,7 +96,8 @@
             android:paddingBottom="@dimen/cell_padding_bottom"
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
-            android:paddingTop="@dimen/cell_padding_top">
+            android:paddingTop="@dimen/cell_padding_top"
+            android:background="#FFFFFF">
 
             <TextView
                 android:id="@+id/textView6"
@@ -121,7 +124,7 @@
             android:id="@+id/imageView12"
             android:layout_width="fill_parent"
             android:layout_height="5dp"
-            android:background="@color/line" />
+            android:background="#edf3f5" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -131,7 +134,8 @@
             android:paddingBottom="@dimen/cell_padding_bottom"
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
-            android:paddingTop="@dimen/cell_padding_top">
+            android:paddingTop="@dimen/cell_padding_top"
+            android:background="#FFFFFF">
 
             <TextView
                 android:id="@+id/textView5"
@@ -146,7 +150,7 @@
                 android:id="@+id/imageView4"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/line_height"
-                android:background="@color/line" />
+                android:background="#edf3f5" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -193,7 +197,7 @@
                     android:layout_width="1dp"
                     android:layout_height="fill_parent"
                     android:id="@+id/imageView10"
-                    android:background="#e0e0e0" />
+                    android:background="#edf3f5" />
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -237,7 +241,7 @@
                 android:id="@+id/imageView14"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/line_height"
-                android:background="@color/line" />
+                android:background="#edf3f5" />
 
             <Button
                 android:layout_width="55dp"
@@ -256,7 +260,7 @@
             android:id="@+id/imageView24"
             android:layout_width="fill_parent"
             android:layout_height="5dp"
-            android:background="@color/line" />
+            android:background="#edf3f5" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -266,7 +270,8 @@
             android:paddingBottom="@dimen/cell_padding_bottom"
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
-            android:paddingTop="@dimen/cell_padding_top">
+            android:paddingTop="@dimen/cell_padding_top"
+            android:background="#FFFFFF">
 
             <TextView
                 android:id="@+id/textView13"
@@ -281,7 +286,7 @@
                 android:id="@+id/imageView5"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/line_height"
-                android:background="@color/line" />
+                android:background="#edf3f5" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -327,7 +332,7 @@
                     android:layout_width="1dp"
                     android:layout_height="fill_parent"
                     android:id="@+id/imageView11"
-                    android:background="#e0e0e0" />
+                    android:background="#edf3f5" />
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -370,7 +375,7 @@
                 android:id="@+id/imageView25"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/line_height"
-                android:background="@color/line" />
+                android:background="#edf3f5" />
 
             <Button
                 android:layout_width="55dp"
@@ -396,22 +401,14 @@
         android:gravity="center_vertical|center_horizontal"
         android:text="设置提醒"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/content_font_blue"
+        android:textColor="#FFFFFF"
         android:textSize="@dimen/content_font_size" />
 
-    <ImageButton
-        android:layout_width="70dp"
-        android:layout_height="16dp"
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
         android:id="@+id/backButton3"
-        android:src="@drawable/back"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:scaleType="fitXY"
-        android:layout_gravity="center_vertical"
-        android:paddingRight="30dp"
-        android:paddingLeft="20dp"
-        android:background="#00ffffff"
-        android:layout_marginTop="13dp" />
+        android:src="@drawable/conleft"
+ />
 
 </RelativeLayout>

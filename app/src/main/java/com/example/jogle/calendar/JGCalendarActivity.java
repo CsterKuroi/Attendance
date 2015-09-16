@@ -20,6 +20,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -77,6 +78,7 @@ public class JGCalendarActivity extends Activity implements OnClickListener, Cal
 	private List<JGDataSet> depListItems;
 	private List<Map<String, Object>> depListWeek;
 	private List<Map<String, Object>> depListMonth;
+	private ImageView backButton3;
 
 	private int uid;
 
@@ -116,7 +118,7 @@ public class JGCalendarActivity extends Activity implements OnClickListener, Cal
 		tabHost.addTab(tabHost.newTabSpec("tab2").setIndicator("最近一周").setContent(R.id.tab2));
 		tabHost.addTab(tabHost.newTabSpec("tab3").setIndicator("本月").setContent(R.id.tab3));
 
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mData);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.myspinner_att, mData);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner = (Spinner) findViewById(R.id.spinner);
 		spinner.setAdapter(adapter);
@@ -145,6 +147,14 @@ public class JGCalendarActivity extends Activity implements OnClickListener, Cal
 		peopleListmonth = (ListView) findViewById(R.id.peoplelistmonth);
 		peopleListMonthAdapter = new JGPeopleListAdapter(getApplicationContext(), depListMonth);
 		peopleListmonth.setAdapter(peopleListMonthAdapter);
+
+		backButton3 = (ImageView) findViewById(R.id.imageButton3);
+		backButton3.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 	}
 
 	private void findViewbyId() {

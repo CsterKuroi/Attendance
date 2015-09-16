@@ -8,7 +8,7 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/title_height"
-        android:background="@color/title_background"
+        android:background="#106bb9"
         android:id="@+id/linearLayout"
         android:gravity="center_horizontal"
         android:paddingLeft="@dimen/cell_padding_right"
@@ -25,7 +25,8 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="外勤签到"
             android:id="@+id/textView"
-            android:textSize="@dimen/title_font_size" />
+            android:textSize="18sp"
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
 
